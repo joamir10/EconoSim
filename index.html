@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EconoSim - A Game of Choices</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #2c3e50;
+    }
+
+    .controls, .results {
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    span {
+      font-weight: 600;
+      color: #00796b;
+    }
+
+    button {
+      background-color: #00796b;
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .results h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #37474f;
+    }
+
+    .results p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>EconoSim: A Game of Choices</h1>
+  <div class="controls">
+    <label>Taxes (%):
+      <input type="range" id="taxes" min="0" max="50" value="20">
+      <span id="taxVal">20</span>%
+    </label>
+
+    <label>Government Spending ($B):
+      <input type="range" id="spending" min="0" max="1000" value="500">
+      <span id="spendVal">500</span>
+    </label>
+
+    <label>Interest Rate (%):
+      <input type="range" id="interest" min="0" max="10" step="0.1" value="2">
+      <span id="interestVal">2.0</span>%
+    </label>
+  </div>
+
+  <button onclick="updateEconomy()">Simulate</button>
+
+  <div class="results">
+    <h2>Economic Indicators</h2>
+    <p>GDP Growth: <span id="gdp">0.0%</span></p>
+    <p>Unemployment: <span id="unemployment">5.0%</span></p>
+    <p>Inflation: <span id="inflation">2.0%</span></p>
+  </div>
+
+  <script>
+    function updateEconomy() {
+      const tax = parseInt(document.getElementById("taxes").value);
+      const spending = parseInt(document.getElementById("spending").value);
+      const interest = parseFloat(document.getElementById("interest").value);
+
+      document.getElementById("taxVal").innerText = tax;
+      document.getElementById("spendVal").innerText = spending;
+      document.getElementById("interestVal").innerText = interest.toFixed(1);
+
+      let gdp = (spending / 1000) * 5 - (tax / 50) * 2 - (interest / 10) * 3;
+      let unemployment = 6 - (spending / 1000) * 2 + (tax / 50) * 2;
+      let inflation = 1 + (spending / 1000) * 2 + (interest / 10) * 1.5;
+
+      gdp = gdp.toFixed(1);
+      unemployment = Math.min(Math.max(unemployment, 2), 20).toFixed(1);
+      inflation = Math.min(Math.max(inflation, 0), 10).toFixed(1);
+
+      document.getElementById("gdp").innerText = gdp + "%";
+      document.getElementById("unemployment").innerText = unemployment + "%";
+      document.getElementById("inflation").innerText = inflation + "%";
+    }
+  </script>
+</body>
+</html>
