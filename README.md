@@ -1,3 +1,4 @@
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
 # 🌍 EconoSim: A Game of Choices
 
 **EconoSim** is an interactive educational simulation game that helps users understand the impact of fiscal and monetary policy decisions on an economy. Through simple controls and real-time feedback, players can explore how taxes, government spending, and interest rates affect GDP growth, unemployment, and inflation.
